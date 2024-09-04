@@ -1,0 +1,79 @@
+https://leetcode.com/problems/merge-nodes-in-between-zeros/description/
+
+
+solution
+
+/*
+ * @lc app=leetcode id=2181 lang=cpp
+ *
+ * [2181] Merge Nodes in Between Zeros
+ */
+
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+int size(ListNode* head)
+    {
+        ListNode*temp=head;
+        int cnt=0;
+        while (temp != NULL)
+        {
+            cnt++;
+           temp=temp->next;
+        }
+        return cnt;
+        
+    }
+    void take_in(ListNode*& newhead, ListNode*& newtail, int val)
+{
+    ListNode* newnode= new ListNode(val);
+    if(newhead== NULL)
+    {
+        newhead=newnode;
+        newtail=newnode;
+        return;
+    }
+    else 
+    {
+        newtail->next=newnode;
+        newtail=newnode;
+    }
+}
+    ListNode* mergeNodes(ListNode* head) {
+        int sz=size(head);
+         ListNode*newhead= NULL;
+        ListNode*newtail= NULL;
+        ListNode* temp=head;
+         temp=temp->next;
+          long long sum=0;
+        for(;temp!= NULL;)
+        {
+           
+            if(temp->val != 0)
+            {
+                sum= sum+temp->val;
+                // cout<<temp->val<<" "<<sum<<endl;
+            }
+            else if(temp->val == 0)
+            {
+                // cout<<sum<<endl;
+                take_in(newhead, newtail, sum);
+                sum=0;
+            }
+            temp=temp->next;
+        }
+        return newhead;
+    }
+};
+// @lc code=end
+
