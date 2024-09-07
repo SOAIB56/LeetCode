@@ -1,0 +1,64 @@
+https://leetcode.com/problems/valid-parentheses/submissions/1381670096/
+
+solution
+/*
+ * @lc app=leetcode id=20 lang=cpp
+ *
+ * [20] Valid Parentheses
+ */
+
+// @lc code=start
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char>st;
+        bool flag= true;
+        for(char c: s)
+        {
+            if(c=='(' ||  c=='{' || c== '[')
+            {
+                st.push(c);
+            }
+            else
+            {
+                if(st.empty()== true)
+                {
+                    flag=false;
+                }
+                else
+                {
+                    if(c==')' && st.top()=='(')
+                    {
+                        st.pop();
+                    }
+                    else if(c=='}' && st.top()=='{')
+                    {
+                        st.pop();
+                    }
+                    else if(c==']' && st.top()=='[')
+                    {
+                        st.pop();
+                    }
+                    else 
+                    {
+                        flag= false;
+                        break;
+                    }
+                }
+                
+            }
+        }
+        if(st.empty() != true)
+        {
+            return false;
+        }
+        else 
+        {
+             if(flag)return true;
+        else return false;
+        }
+       
+    }
+};
+// @lc code=end
+
