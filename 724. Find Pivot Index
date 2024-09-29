@@ -1,0 +1,66 @@
+problem link: https://leetcode.com/problems/find-pivot-index/description/
+
+solution:
+class Solution {
+public:
+
+int check(vector<int>& v, int start, int end)
+{
+int sum=0;
+    for(int i= start; i<= end; i++)
+    {
+        sum+= v[i];
+    }
+    return sum;
+}
+    int pivotIndex(vector<int>& nums) 
+    {
+        int pivot=-1;
+        int l, r;
+        for(int i=0; i<nums.size(); i++)
+        {
+            if(i==0)
+            {
+                r=check(nums, 1, nums.size()-1);
+                l=0;
+                if(l==r)
+                {
+                    pivot=i;
+                      break;
+                }
+            }
+            else if(i==1)
+            {
+                l=nums[0];
+                r= check(nums, i+1, nums.size()-1);
+                 if(l==r)
+                {
+                    pivot=i;
+                      break;
+                }
+            }
+            else if(i==nums.size()-1)
+            {
+                l=check(nums, 0, i-1);
+                r=0;
+                 if(l==r)
+                {
+                    pivot=i;
+                      break;
+                }
+            }
+            else
+            {
+                l=check(nums, 0, i-1);
+               r= check(nums, i+1, nums.size()-1);
+                if(l==r)
+                {
+                    pivot=i;
+                      break;
+                }
+            }
+            
+        }
+        return pivot;
+    }
+};
