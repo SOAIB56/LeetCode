@@ -1,0 +1,32 @@
+problem link: https://leetcode.com/problems/missing-number/description/
+
+solution:
+class Solution {
+public:
+    int missingNumber(vector<int>& nm) {
+        sort(nm.begin(), nm.end());
+        int missing;
+        if(nm.size()==1)
+        {
+            if(nm.front() == 0)
+            missing= 1;
+            else 
+            missing =0;
+        }
+        else
+        {
+            for(int i=1; i<= nm.size();i++)
+            {
+                if(nm.front()!=0) missing =0;
+                else
+                {
+                    if(nm[i-1]!= i) missing= i;
+                }
+                
+            }
+        }
+        
+        return missing;
+
+    }
+};
